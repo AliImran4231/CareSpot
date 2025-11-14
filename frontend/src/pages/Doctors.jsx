@@ -5,6 +5,7 @@ import { AppContext } from "../context/AppContext";
 const Doctors = () => {
   const { speciality } = useParams();
   const [filterDoc, setFilterDoc] = useState([]);
+  const [showFilters, setShowFilter] = useState(false);
   const navigate = useNavigate();
 
   const { doctors } = useContext(AppContext);
@@ -24,7 +25,15 @@ const Doctors = () => {
     <div>
       <p className="text-gray-600">Browse through the doctors specialist.</p>
       <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
-        <div className="flex flex-col gap-4 text-sm text-gray-600">
+        <button
+          className={`py-1 px-3 border rounded text-sm transition-all sm:hidden cursor-pointer ${
+            showFilters ? "bg-[#5f6FFF] text-white" : ""
+          }`}
+          onClick={() => setShowFilter((prev) => !prev)}
+        >
+          Filters
+        </button>
+        <div className={`${showFilters ? "flex" : 'hidden sm:flex'} flex-col gap-4 text-sm text-gray-600`}>
           <p
             onClick={() =>
               speciality === "General Physician"
@@ -110,7 +119,7 @@ const Doctors = () => {
               className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-2"
             >
               <img
-                className="bg-blue-50 w-full h-48 object-cover"
+                className="bg-blue-50 w-full sm:h-80  h-50 md:h-80 object-cover"
                 src={item.image}
                 alt=""
               />
