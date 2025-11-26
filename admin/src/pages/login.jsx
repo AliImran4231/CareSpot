@@ -23,6 +23,7 @@ const login = () => {
         if (data.success) {
           localStorage.setItem("aToken", data.token);
           setAToken(data.token);
+          toast.success("Admin Login");
         } else {
           toast.error(data.message);
         }
